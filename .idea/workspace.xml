@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a3c82d48-1d9b-49d4-b31f-976dbc42d818" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/video.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/faculties.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/faculties.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videos.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videosFacultyPage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videosFacultyPage.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -187,7 +190,7 @@
       <workItem from="1575669474135" duration="737000" />
       <workItem from="1575712922789" duration="6753000" />
       <workItem from="1575787976990" duration="49452000" />
-      <workItem from="1576159015736" duration="20518000" />
+      <workItem from="1576159015736" duration="35510000" />
     </task>
     <servers />
   </component>
@@ -214,9 +217,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php</url>
-          <line>12</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videosFacultyPage.blade.php</url>
+          <line>37</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -48,9 +48,9 @@
                     <div >
                         <div class="col-md-12 form-group">
                             <label for="name">Video Name </label>
-                            <input type="text" id="name" name="video_name" class="form-control py-2">
+                            <input type="text" id="name" name="video_name" value="{{old("video_name")}}" class="form-control py-2">
                         </div>
-                        @error('name')
+                        @error('video_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -60,9 +60,9 @@
                         <div class="col-md-12 form-group">
                             <label for="name">Faculty</label>
                             <select class="custom-select" name="faculty_id" >
-                                <option selected value="null">Open this select menu</option>
+                                <option  value="null">Open this select menu</option>
                                 @foreach($faculties as $faculty)
-                                    <option value="{{$faculty->id}}">{{$faculty->name}}</option>
+                                    <option selected value="{{$faculty->id}}">{{$faculty->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -75,9 +75,20 @@
                     <div >
                         <div class="col-md-12 form-group">
                             <label for="name">Video Tag</label>
-                            <input type="text" name="video_tag" class="form-control py-2">
+                            <input type="text" name="video_tag"  value="{{old("video_tag")}}"class="form-control py-2">
                         </div>
-                        @error('email')
+                        @error('video_tag')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </td>
+                <td>
+                    <div >
+                        <div class="col-md-12 form-group">
+                            <label for="name">Video URL </label>
+                            <input type="text" name="video_url"  value="{{old("video_url")}}"class="form-control py-2">
+                        </div>
+                        @error('video_url')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -92,7 +103,8 @@
     </form>
 
  @endif
-       <div class="row">
+   <!--end of col-->
+       <div class="row" style="margin-top: 20px;">
            <div class="col-lg-3">
                <h1 class="my-4">Faculty</h1>
                <div class="list-group">
@@ -102,34 +114,131 @@
                </div>
            </div>
            <!-- /.col-lg-3 -->
-
+           @foreach( $videos  as $vi)
                <div class="col-lg-9">
                    <div class="row">
-                       @foreach( $videos  as $video)
-                           <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
-                               <div class="card h-100" style="width: fit-content;">
-                                   <div class="card-body">
-                                       <h4 class="card-title">
-                                           <a href="#">
-                                               <iframe width="200" height="150" src="{{$video->video_url}}" frameborder="0"
-                                                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                       allowfullscreen></iframe>
-                                               <h5>{{$video->video_tag }}  {{$video->video_name }}   </h5>
-                                           </a>
-                                       </h4>
+                       @if(count($vi->video)>0)
+                           @foreach($vi->video as $video)
+                               <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
+                                   <div class="card h-100" style="width: fit-content;">
+                                       <div class="card-body">
+                                           <h4 class="card-title">
+                                               <a href="#">
+                                                   <iframe width="200" height="150" src="{{$video->video_url}}" frameborder="0"
+                                                           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                           allowfullscreen></iframe>
+                                                   <h5>{{$video->video_tag }}  {{$video->video_name }}   </h5>
+                                               </a>
+                                           </h4>
+                                       </div>
+                                       @if(auth()->user()->role_id==1)
+                                       <div class="row">
+                                           <!-- Button trigger modal -->
+
+                                           <button type="button" class="btn btn-primary" style="margin: 0px 43px 10px 37px;width: 76px;height: 40px;" data-toggle="modal" data-target="#exampleModalCenter"> Edit </button>
+                                           <form action="{{url('/faculty/video/delete/'.$video->id)}}" method="post">
+                                               @method('delete')
+                                               @csrf
+                                               <button type="submit" class="btn btn-danger" > delete </button>
+                                           </form>
+                                       </div>
+                                       @endif
+                                       <!-- Modal -->
+                                       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                           <div class="modal-dialog modal-dialog-centered" role="document">
+                                               <div class="modal-content">
+                                                   <div class="modal-header">
+                                                       <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                           <span aria-hidden="true">&times;</span>
+                                                       </button>
+                                                   </div>
+                                                   <form action="{{url('/faculty/video/edit/'.$video->id)}}" method="post">
+                                                       @method('patch')
+                                                       @csrf
+                                                       <div class="modal-body">
+                                                           <table>
+                                                               <tr>
+                                                                   <td>
+                                                                       <div >
+                                                                           <div class="col-md-12 form-group">
+                                                                               <label for="name">Video Name </label>
+                                                                               <input type="text" id="name" name="video_name" value="{{old("video_name")}}" class="form-control py-2">
+                                                                           </div>
+                                                                           @error('video_name')
+                                                                           <div class="alert alert-danger">{{ $message }}</div>
+                                                                           @enderror
+                                                                       </div>
+                                                                   </td>
+                                                                   <td>
+                                                                       <div >
+                                                                           <div class="col-md-12 form-group">
+                                                                               <label for="name">Faculty</label>
+                                                                               <select class="custom-select" name="faculty_id" >
+                                                                                   <option  value="null">Open this select menu</option>
+                                                                                   @foreach($faculties as $faculty)
+                                                                                       <option selected value="{{$faculty->id}}">{{$faculty->name}}</option>
+                                                                                   @endforeach
+                                                                               </select>
+                                                                           </div>
+                                                                           @error('faculty_id')
+                                                                           <div class="alert alert-danger">{{ $message }}</div>
+                                                                           @enderror
+                                                                       </div>
+                                                                   </td>
+                                                                   <td>
+                                                                       <div >
+                                                                           <div class="col-md-12 form-group">
+                                                                               <label for="name">Video Tag</label>
+                                                                               <input type="text" name="video_tag"  value="{{old("video_tag")}}"class="form-control py-2">
+                                                                           </div>
+                                                                           @error('video_tag')
+                                                                           <div class="alert alert-danger">{{ $message }}</div>
+                                                                           @enderror
+                                                                       </div>
+                                                                   </td>
+                                                                   <td>
+                                                                       <div >
+                                                                           <div class="col-md-12 form-group">
+                                                                               <label for="name">Video URL </label>
+                                                                               <input type="text" name="video_url"  value="{{old("video_url")}}"class="form-control py-2">
+                                                                           </div>
+                                                                           @error('video_url')
+                                                                           <div class="alert alert-danger">{{ $message }}</div>
+                                                                           @enderror
+                                                                       </div>
+                                                                   </td>
+                                                               </tr>
+                                                           </table>
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                           <button type="submit" class="btn btn-primary">Save changes</button>
+                                                       </div>
+                                                   </form>
+                                               </div>
+                                           </div>
+
+
+                                       </div>
                                    </div>
                                </div>
+                           @endforeach
+                       @else
+                           <div class="text-center">
+                               <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  There's No Videos Now</p>
                            </div>
-                       @endforeach
+                       @endif
                    </div>
                    <!-- /.row -->
                </div>
-
+       @endforeach
        <!-- /.col-lg-9 -->
        </div>
        <!-- /.row -->
    </div>
 @include('includes.footer')
+
 
 
 {{-- that good button that's important if u need it in future--}}

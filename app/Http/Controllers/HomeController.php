@@ -25,6 +25,7 @@ class HomeController extends Controller
         $faculties=faculty::all();
         return view('layouts.faculties',compact('faculties'));
     }
+
 //    public function facultyCourse($faculty_id){
 //        $faculties=faculty::all();
 //        $id=$faculty_id;

@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/faculty/upload/', 'userPages\facultyPagesController@addVideo')->name('addVideo');
     Route::get('/faculty/upload', 'userPages\facultyPagesController@addVideoget');
+    Route::patch('/faculty/video/edit/{video_id}', 'userPages\facultyPagesController@video_update');
+    Route::delete('/faculty/video/delete/{video_id}', 'userPages\facultyPagesController@destroy');
 
 //    Route::get('/faculty/search', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');

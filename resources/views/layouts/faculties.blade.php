@@ -21,7 +21,7 @@
     <div class="card-body">
         <h5 class="card-title"> Videos </h5>
         <p class="card-text"></p>
-        <a href="#" class="btn btn-primary"> Enter</a>
+        <a href="{{route('showVideos')}}" class="btn btn-primary"> Enter</a>
     </div>
 </div>
 

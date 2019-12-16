@@ -90,9 +90,15 @@ $user_id=auth()->user()->id;
 
 //file part
 
+public function getFilePage( )
+{
+    $faculties = faculty::all();
+    return view('layouts.pages.files',compact('faculties'));
+}
 
-
-
+public function uploadFile(Request $request){
+    $request->uploaded->storeAs('uploadedFiles', $request->uploaded->getClientOriginalName());
+}
 
 
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class filesCoure extends Model
+class courseFile extends Model
 {
     //
 }

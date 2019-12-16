@@ -33,15 +33,15 @@ Route::group(['middleware' => ['auth']], function () {
     //the pages of{ video , student form and files }
     Route::get('/faculty/videos', 'userPages\facultyPagesController@showVideoPage')->name('showVideos');
     Route::get('/faculty/video/{faculty_name}', 'userPages\facultyPagesController@showVideosFacultyPage')->name('showVideos.faculty');
-
+    ///search for video page
     Route::any('/faculty/search', 'userPages\facultyPagesController@Search')->name('search');
-
+    //video page
     Route::post('/faculty/upload/', 'userPages\facultyPagesController@addVideo')->name('addVideo');
     Route::get('/faculty/upload', 'userPages\facultyPagesController@addVideoget');
     Route::patch('/faculty/video/edit/{video_id}', 'userPages\facultyPagesController@video_update');
     Route::delete('/faculty/video/delete/{video_id}', 'userPages\facultyPagesController@destroy');
-
-//    Route::get('/faculty/search', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
+    //old exams page
+    Route::get('/faculty/files', 'userPages\facultyPagesController@getFilePage')->name('files');
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 
 

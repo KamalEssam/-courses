@@ -25,7 +25,7 @@
                 <!--end of col-->
                 <div class="col">
                     <input class="form-control form-control-lg form-control-borderless" type="search"
-                           placeholder="Search topics or keywords" name="videoSearch">
+                           placeholder="Search topics or keywords" value="{{$query}}" name="videoSearch">
                 </div>
                 <!--end of col-->
                 <div class="col-auto">
@@ -47,11 +47,10 @@
             </div>
         </div>
         <!-- /.col-lg-3 -->
-        @foreach( $videos  as $vi)
+
             <div class="col-lg-9">
-                <div class="row">
-                    @if(count($vi->video)>0)
-                        @foreach($vi->video as $video)
+                <div class="row">@if(count($details)>0)
+                        @foreach($details as $video)
                         <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
                             <div class="card h-100" style="width: fit-content;">
                                 <div class="card-body">
@@ -159,13 +158,12 @@
                     @endforeach
                     @else
                         <div class="text-center">
-                            <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  There's No Videos Now</p>
+                            <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  {{$message}}</p>
                         </div>
                     @endif
                 </div>
                 <!-- /.row -->
             </div>
-    @endforeach
     <!-- /.col-lg-9 -->
     </div>
     <!-- /.row -->

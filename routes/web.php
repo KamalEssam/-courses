@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/faculty/videos', 'userPages\facultyPagesController@showVideoPage')->name('showVideos');
     Route::get('/faculty/video/{faculty_name}', 'userPages\facultyPagesController@showVideosFacultyPage')->name('showVideos.faculty');
 
-    Route::get('/faculty/search', 'userPages\facultyPagesController@Search')->name('search');
+    Route::any('/faculty/search', 'userPages\facultyPagesController@Search')->name('search');
 
     Route::post('/faculty/upload/', 'userPages\facultyPagesController@addVideo')->name('addVideo');
     Route::get('/faculty/upload', 'userPages\facultyPagesController@addVideoget');

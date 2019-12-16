@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class facultyPagesController extends Controller
 {
+    ///video part
+    ///
+    /// please look again for constructor for faculties Navbar calling
+//     public function __construct()
+//        {
+//
+//
+//        }
     public function showVideoPage()
     {
         $faculties = faculty::all();
@@ -51,8 +59,15 @@ $user_id=auth()->user()->id;
 
     public function Search(Request $request)
     {
-
+        $faculties = faculty::all();
+        $videoSearch = $request['videoSearch']  ;
+        $searchRes = video::where('video_tag','LIKE','%'.$videoSearch.'%')->orWhere('video_name','LIKE','%'.$videoSearch.'%')->get();
+        if(count($searchRes) > 0)
+            return view('/layouts/pages/videoSearch',compact('faculties'))->withDetails($searchRes)->withQuery ( $videoSearch );
+        else
+            return view ('/layouts/pages/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery ( $videoSearch );
     }
+
     public function video_update(Request $request ,$video_id)
     {
         $validatedData = $request->validate([
@@ -72,6 +87,8 @@ $user_id=auth()->user()->id;
         return redirect('/faculty/videos')->with('success', 'Show is successfully deleted');
     }
 
+
+//file part
 
 
 

@@ -17,7 +17,6 @@
 ">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
     <div class="col-12 col-md-10 col-lg-8">
         <form class="card card-sm" method="post" action="{{route('search')}}">
             @csrf
@@ -50,13 +49,18 @@
             <div class="file-field">
                 <a class="btn-floating purple-gradient mt-0 float-left">
                     <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
-                    <input type="file" name="file" class="btn btn-dark"> @foreach($errors->all() as $message)
+                    <input type="file" name="file" class="btn btn-dark">
+                    @foreach($errors->all() as $message)
                         <div class="alert alert-danger" role="alert">
                             {{$message}}
                         </div>
                     @endforeach
+                    @if( $message=Session::get("message"))
+                        <div class="alert alert-success" role="alert">
+                            {{$message}}
+                        </div>
+                    @endif
                 </a>
-
                 <button type="submit" class="btn btn-primary" style="margin-left: 10px; height: 43px;">Upload</button>
             </div>
         </form>
@@ -72,25 +76,26 @@
                 @endforeach
             </div>
         </div>
-
         <!-- display files from storage/.col-lg-3 -->
-
         <div class="col-lg-9">
             <div class="row">
-                @if(count($files)>0)
-                    @foreach($files as $file)
+                @if(count($courseFiles)>0)
+                    @foreach($courseFiles as $file)
                         <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
                             <div class="card h-100" style="width: fit-content;">
-                                <a href="#"><img class="card-img-top" src="{{url('icon/filePng.png')}}"
-                                                 style="width:73%" alt=""></a>
+                                <a href="#"><img class="card-img-top" src="{{url('icon/filePng.png')}}"style="width:73%" alt=""></a>
                                 <div class="card-body">
                                     <div class="line" style="width: 200px;">
-                                        <a href="">{{$file}}</a>
+                                        <a href="">{{$file->fileName}}</a>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="button" class="btn btn-primary">Download</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <form  style="    display: contents;" action="{{url('/faculty/file/delete/'.$file->id)}}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"> Delete  </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

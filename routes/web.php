@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/faculty/files', 'userPages\facultyPagesController@getFilePage')->name('files');
     Route::post('/faculty/files/upload', 'userPages\facultyPagesController@upload')->name('upload');
     Route::get('/faculty/files/all', 'userPages\facultyPagesController@download')->name('download');
+    Route::delete('/faculty/file/delete/{file_id}', 'userPages\facultyPagesController@deleteFile');
+
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 
 

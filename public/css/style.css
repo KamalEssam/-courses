@@ -2231,4 +2231,10 @@ blockquote p {
 #uploadForm form button:active{
     border:0;
 }
+.nothingParagraph{
+    padding: 129px 126px 96px 0px;
+    color: #776b7b;
+    width: 1000px;
+    font-size: 78px;
+}
 

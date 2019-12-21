@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/faculty/video/delete/{video_id}', 'userPages\facultyPagesController@destroy');
     //old exams page
     Route::get('/faculty/files', 'userPages\facultyPagesController@getFilePage')->name('files');
+    Route::post('/faculty/files/upload', 'userPages\facultyPagesController@upload')->name('upload');
+    Route::get('/faculty/files/all', 'userPages\facultyPagesController@download')->name('download');
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 
 

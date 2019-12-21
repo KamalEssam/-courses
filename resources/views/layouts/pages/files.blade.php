@@ -11,13 +11,14 @@
         box-shadow: none;
     }
 </style>
-    <!-- Search form -->
-   <div class="row justify-content-center" style="
+<!-- Search form -->
+<div class="row justify-content-center" style="
     margin: 73px 16px 33px 108px;
 ">
-       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-       <div class="col-12 col-md-10 col-lg-8">
+    <div class="col-12 col-md-10 col-lg-8">
         <form class="card card-sm" method="post" action="{{route('search')}}">
             @csrf
             <div class="card-body row no-gutters align-items-center">
@@ -26,50 +27,85 @@
                 </div>
                 <!--end of col-->
                 <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" name="videoSearch" type="search" placeholder="Search topics or keywords">
+                    <input class="form-control form-control-lg form-control-borderless" name="videoSearch" type="search"
+                           placeholder="Search topics or keywords">
                 </div>
                 <!--end of col-->
                 <div class="col-auto">
-                    <button class="btn btn-lg btn-success"name="action" value="search" type="submit">Search</button>
+                    <button class="btn btn-lg btn-success" name="action" value="search" type="submit">Search</button>
                 </div>
                 <!--end of col-->
             </div>
         </form>
     </div>
     <!--end of col-->
+    <style>
 
+    </style>
     <!-- Upload  form allowed for admin  -->
-       @if(auth()->user()->role_id==1)
-           <div id="uploadForm">
+    @if(auth()->user()->role_id==1)
+        <form class="md-form" action="{{route('upload')}}" method="post" style="margin: 10px"
+              enctype="multipart/form-data">
+            @csrf
+            <div class="file-field">
+                <a class="btn-floating purple-gradient mt-0 float-left">
+                    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                    <input type="file" name="file" class="btn btn-dark"> @foreach($errors->all() as $message)
+                        <div class="alert alert-danger" role="alert">
+                            {{$message}}
+                        </div>
+                    @endforeach
+                </a>
 
-               <form action="{{ route('upload.file') }}" method="POST" enctype="multipart/form-data">
-                   <input type="file" name="uploaded" multiple>
-                   <p>Drag your files here or click in this area.</p>
-                   <button type="submit">Upload</button>
-               </form>
-           </div>
-   @endif
+                <button type="submit" class="btn btn-primary" style="margin-left: 10px; height: 43px;">Upload</button>
+            </div>
+        </form>
+@endif
+<!--end of col-->
+    <div class="row" style="margin-top: 58px;">
+        <div class="col-lg-3">
+            <h1 class="my-4">Faculty</h1>
+            <div class="list-group">
+                <a href="{{url('faculty/videos')}}" class="list-group-item">All Videos</a>
+                @foreach($faculties as $faculty)
+                    <a href="{{url('faculty/video/'.$faculty->name)}}" class="list-group-item">{{$faculty->name}}</a>
+                @endforeach
+            </div>
+        </div>
 
-   <!--end of col-->
-       <div class="row" style="margin-top: 58px;">
-           <div class="col-lg-3">
-               <h1 class="my-4">Faculty</h1>
-               <div class="list-group">
-                   <a href="{{url('faculty/videos')}}" class="list-group-item">All Videos</a>
-               @foreach($faculties as $faculty)
-                       <a href="{{url('faculty/video/'.$faculty->name)}}" class="list-group-item">{{$faculty->name}}</a>
-                   @endforeach
-               </div>
-           </div>
-           <!-- /.col-lg-3 -->
+        <!-- display files from storage/.col-lg-3 -->
 
-                   <div class="text-center">
-                       <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  There's No Videos Now</p>
-                   </div>
+        <div class="col-lg-9">
+            <div class="row">
+                @if(count($files)>0)
+                    @foreach($files as $file)
+                        <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
+                            <div class="card h-100" style="width: fit-content;">
+                                <a href="#"><img class="card-img-top" src="{{url('icon/filePng.png')}}"
+                                                 style="width:73%" alt=""></a>
+                                <div class="card-body">
+                                    <div class="line" style="width: 200px;">
+                                        <a href="">{{$file}}</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-primary">Download</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="text-center">
+                        <p class="nothingParagraph" > There's No files Now</p>
+                    </div>
+                @endif
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
 
-       <!-- /.col-lg-9 -->
-       </div>
-
-       <!-- /.row -->
-   </div>
+    <!-- /.row -->
+</div>
 @include('includes.footer')

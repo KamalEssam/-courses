@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\userPages;
 
+use App\courseFile;
 use App\faculty;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\video;
+use Couchbase\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class facultyPagesController extends Controller
@@ -22,7 +25,7 @@ class facultyPagesController extends Controller
     public function showVideoPage()
     {
         $faculties = faculty::all();
-         $videos = faculty::with('video')->get();
+        $videos = faculty::with('video')->get();
         return view('layouts.pages.videos', compact('faculties', 'videos'));
     }
 
@@ -39,11 +42,11 @@ class facultyPagesController extends Controller
         $addvideo = $request->validate([
             'video_tag' => 'required',
             'video_name' => 'required',
-            'video_url'  => 'required',
+            'video_url' => 'required',
             'faculty_id' => 'required',
-        ],[],[]);
-$user_id=auth()->user()->id;
-            $addvideo['user_id']=auth()->user()->id;
+        ], [], []);
+        $user_id = auth()->user()->id;
+        $addvideo['user_id'] = auth()->user()->id;
 
 //        if ($addvideo->fails()) {
 //            dd('d');
@@ -60,26 +63,27 @@ $user_id=auth()->user()->id;
     public function Search(Request $request)
     {
         $faculties = faculty::all();
-        $videoSearch = $request['videoSearch']  ;
-        $searchRes = video::where('video_tag','LIKE','%'.$videoSearch.'%')->orWhere('video_name','LIKE','%'.$videoSearch.'%')->get();
-        if(count($searchRes) > 0)
-            return view('/layouts/pages/videoSearch',compact('faculties'))->withDetails($searchRes)->withQuery ( $videoSearch );
+        $videoSearch = $request['videoSearch'];
+        $searchRes = video::where('video_tag', 'LIKE', '%' . $videoSearch . '%')->orWhere('video_name', 'LIKE', '%' . $videoSearch . '%')->get();
+        if (count($searchRes) > 0)
+            return view('/layouts/pages/videoSearch', compact('faculties'))->withDetails($searchRes)->withQuery($videoSearch);
         else
-            return view ('/layouts/pages/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery ( $videoSearch );
+            return view('/layouts/pages/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery($videoSearch);
     }
 
-    public function video_update(Request $request ,$video_id)
+    public function video_update(Request $request, $video_id)
     {
         $validatedData = $request->validate([
             'video_tag' => 'required',
             'video_name' => 'required',
-            'video_url'  => 'required',
+            'video_url' => 'required',
             'faculty_id' => 'required',
-        ],[],[]);
+        ], [], []);
         video::whereId($video_id)->update($validatedData);
         return redirect('/faculty/videos')->with('success', 'Show is successfully updated');
     }
-    public function destroy(Request $request ,$video_id)
+
+    public function destroy(Request $request, $video_id)
     {
         $show = video::findOrFail($video_id);
         $show->delete();
@@ -90,17 +94,54 @@ $user_id=auth()->user()->id;
 
 //file part
 
-public function getFilePage( )
-{
-    $faculties = faculty::all();
-    return view('layouts.pages.files',compact('faculties'));
-}
+    public function getFilePage()
+    {
+        $faculties = faculty::all();
+        $dir = config('app.DestinationPath');
+        $files = Storage::files($dir . "uploads");
+        return view('layouts.pages.files', compact('faculties', 'files'));
+    }
 
-public function uploadFile(Request $request){
-    $request->uploaded->storeAs('uploadedFiles', $request->uploaded->getClientOriginalName());
-}
+    public function upload(Request $request)
+    {
+        // dd(Validator::make(request()->all(),['file'  => 'required|mimes:doc,docx,pdf,txt|max:10000']));
+        request()->validate([
+            'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
+        ]);
+        //  dd($request->file('file'));
+        if ($files = $request->file('file')) {
+            $files = $request['file'];
+            $name = $files->getClientOriginalName();
+            $ext = $files->getClientOriginalExtension();
+            $size = $files->getSize();
+            $mim = $files->getMimeType();
+            $realPath = $files->getRealPath();
+            $path = $files->storeAs('/uploads', $name);
+            $storeFile = courseFile::create([
+                'fileName' => $name,
+                'path' => $path,
+                'extension' => $ext,
+                'course_id' => 1,
+            ]);
+            $files=courseFile::get()->all();
+            return redirect("faculty/files",compact('files'))->withMessage('Great! file has been successfully uploaded.');
+        }
+        return redirect("faculty/files")->withErrors("upload failed");
 
+    }
 
+    public function deleteFile(Request $request)
+    {
+
+    }
+
+    public function download(Request $request)
+    {
+        $dir = config('app.DestinationPath');
+        $files = Storage::files($dir);
+        return view('layouts.pages.files', compact('files'));
+
+    }
 
 
 

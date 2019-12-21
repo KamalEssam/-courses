@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c82d48-1d9b-49d4-b31f-976dbc42d818" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/fileSearch.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/files.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videoSearch.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videoSearch.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -139,15 +139,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages" />
       <recent name="C:\Users\kamal\CoursesHelper\app\Http\Controllers\userPages" />
       <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts" />
       <recent name="C:\Users\kamal\Equalization\resources\views\layouts" />
       <recent name="C:\Users\kamal\Equalization\app" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -191,7 +191,7 @@
       <workItem from="1575787976990" duration="49452000" />
       <workItem from="1576159015736" duration="69517000" />
       <workItem from="1576849671292" duration="16034000" />
-      <workItem from="1576893631981" duration="1797000" />
+      <workItem from="1576893631981" duration="5107000" />
     </task>
     <servers />
   </component>

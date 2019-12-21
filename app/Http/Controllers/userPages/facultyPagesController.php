@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\userPages;
+
 use App\courseFile;
 use App\faculty;
 use App\Http\Controllers\Controller;
@@ -9,28 +11,27 @@ use Couchbase\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
 class facultyPagesController extends Controller
 {
-    ///video part
-    ///
-    /// please look again for constructor for faculties Navbar calling
-//     public function __construct()
-//        {
-//
-//
-//        }
+    //this is video part contain all video CRUDs and search functions
+    //here we get all videos
     public function showVideoPage()
     {
         $faculties = faculty::all();
         $videos = faculty::with('video')->get();
         return view('layouts.pages.videos', compact('faculties', 'videos'));
     }
+
+    //here we can all video page for specific faculty
     public function showVideosFacultyPage($faculty_name)
     {
         $faculties = faculty::all();
         $videos = faculty::where('name', $faculty_name)->with('video')->get();
         return view('layouts.pages.videosFacultyPage', compact('faculties', 'videos'));
     }
+
+    // add
     public function addVideo(Request $request)
     {
         $addvideo = $request->validate([
@@ -50,6 +51,8 @@ class facultyPagesController extends Controller
         video::create($addvideo);
         return redirect('faculty/videos/');
     }
+
+    //search using name and tag
     public function Search(Request $request)
     {
         $faculties = faculty::all();
@@ -60,6 +63,8 @@ class facultyPagesController extends Controller
         else
             return view('/layouts/pages/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery($videoSearch);
     }
+
+    //update
     public function video_update(Request $request, $video_id)
     {
         $validatedData = $request->validate([
@@ -71,28 +76,29 @@ class facultyPagesController extends Controller
         video::whereId($video_id)->update($validatedData);
         return redirect('/faculty/videos')->with('success', 'Show is successfully updated');
     }
+
+    //delete video
     public function destroy(Request $request, $video_id)
     {
         $show = video::findOrFail($video_id);
         $show->delete();
         return redirect('/faculty/videos')->with('success', 'Show is successfully deleted');
     }
-//file part
+
+//this's file part
     public function getFilePage()
     {
-        $courseFiles=courseFile::get()->all();
+        $courseFiles = courseFile::get()->all();
         $faculties = faculty::all();
         $dir = config('app.DestinationPath');
         $files = Storage::files($dir . "uploads");
-        return view('layouts.pages.files', compact('faculties','courseFiles', 'files'));
+        return view('layouts.pages.files', compact('faculties', 'courseFiles', 'files'));
     }
+//upload file part
     public function upload(Request $request)
     {
-
-
         // dd(Validator::make(request()->all(),['file'  => 'required|mimes:doc,docx,pdf,txt|max:10000']));
-        request()->validate(['file' => 'required|mimes:doc,docx,pdf,txt|max:2048', ]);
-        //  dd($request->file('file'));
+        request()->validate(['file' => 'required|mimes:doc,docx,pdf,txt|max:2048',]);
         if ($files = $request->file('file')) {
             $files = $request['file'];
             $name = $files->getClientOriginalName();
@@ -105,31 +111,48 @@ class facultyPagesController extends Controller
                 'fileName' => $name,
                 'path' => $path,
                 'extension' => $ext,
-                'course_id' => 1,
+                'course_id' => $request['faculty_id'],
             ]);
 
             return redirect("faculty/files")->withMessage('Great! file has been successfully uploaded.');
         }
         return redirect("faculty/files")->withErrors("upload failed");
     }
-    public function download(Request $request)
+//here for download file
+    public function download($id)
     {
-        $dir = config('app.DestinationPath');
-        $files = Storage::files($dir);
-        return view('layouts.pages.files', compact('files'));
+        $file = courseFile::find($id);
+        return Storage::download($file->path, $file->fileName);
+
     }
+//here delete file
     public function deleteFile(Request $request, $file_id)
     {
-        $show = video::findOrFail($file_id);
-        $show->delete();
-        return redirect('/faculty/files')->with('success', 'Show is successfully deleted');
+        $file = courseFile::findOrFail($file_id);
+        $file->delete();
+        return redirect('/faculty/files')->with('message', 'File is successfully deleted');
+    }
+
+//search
+    public function SearchFile(Request $request)
+    {
+        $faculties = faculty::all();
+        $fileSearch = $request['fileSearch'];
+        $searchRes = courseFile::where('fileName', 'LIKE', '%' . $fileSearch . '%')->orWhere('extension', 'LIKE', '%' . $fileSearch . '%')->get();
+        if (count($searchRes) > 0)
+            return view('layouts.pages.fileSearch', compact('faculties'))->withDetails($searchRes)->withQuery($fileSearch);
+        else
+            return redirect('layouts.pages.fileSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery("");
     }
 
 
-
-
-
-
+    public function getFacultyFileaPage($faculty_name)
+    {
+        $faculties = faculty::all();
+        //here is my mistake i have to change it. it will not effect on result but it's for cleaning names" course_id --> faculty id"
+        $files= courseFile::where('id', $faculty_name)->with('course_id')->get();
+        return view('layouts.pages.videosFacultyPage', compact('faculties', 'videos'));
+    }
 
 
 

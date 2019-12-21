@@ -26,7 +26,7 @@
                 </div>
                 <!--end of col-->
                 <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" value="{{old('fileSearch')}}"
+                    <input class="form-control form-control-lg form-control-borderless" value="{{$query}}"
                            name="fileSearch" type="search"
                            placeholder="Search topics or keywords">
                 </div>
@@ -44,9 +44,8 @@
     </style>
     <!-- Upload  form allowed for admin  -->
     @if(auth()->user()->role_id==1)
-        <form class="md-form" action="{{route('upload')}}" method="post" style="margin: 10px" enctype="multipart/form-data">
-        <table>
-      <td>
+        <form class="md-form" action="{{route('upload')}}" method="post" style="margin: 10px"
+              enctype="multipart/form-data">
             @csrf
             <div class="file-field">
                 <a class="btn-floating purple-gradient mt-0 float-left">
@@ -65,24 +64,6 @@
                 </a>
                 <button type="submit" class="btn btn-primary" style="margin-left: 10px; height: 43px;">Upload</button>
             </div>
-      </td>
-        <td>
-            <div >
-                <div class="col-md-12 form-group">
-                    <label for="name">Faculty</label>
-                    <select class="custom-select" name="faculty_id" >
-                        <option  value="null">Open this select menu</option>
-                        @foreach($faculties as $faculty)
-                            <option selected value="{{$faculty->id}}">{{$faculty->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('faculty_id')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-        </td>
-        </table>
         </form>
 @endif
 <!--end of col-->
@@ -99,8 +80,8 @@
         <!-- display files from storage/.col-lg-3 -->
         <div class="col-lg-9">
             <div class="row">
-                @if(count($courseFiles)>0)
-                    @foreach($courseFiles as $file)
+                @if(count($details)>0)
+                    @foreach($details as $file)
                         <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
                             <div class="card h-100" style="width: fit-content;">
                                 <a href="#"><img class="card-img-top" src="{{url('icon/filePng.png')}}"

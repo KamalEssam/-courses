@@ -43,8 +43,10 @@ Route::group(['middleware' => ['auth']], function () {
     //old exams page
     Route::get('/faculty/files', 'userPages\facultyPagesController@getFilePage')->name('files');
     Route::post('/faculty/files/upload', 'userPages\facultyPagesController@upload')->name('upload');
-    Route::get('/faculty/files/all', 'userPages\facultyPagesController@download')->name('download');
+    Route::get('/faculty/files/all', 'userPages\facultyPagesController@download');
     Route::delete('/faculty/file/delete/{file_id}', 'userPages\facultyPagesController@deleteFile');
+    Route::get('/faculty/file/download/{file_id}', 'userPages\facultyPagesController@download')->name('download');
+    Route::post('/faculty/file/search', 'userPages\facultyPagesController@searchFile')->name('search.file');
 
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 

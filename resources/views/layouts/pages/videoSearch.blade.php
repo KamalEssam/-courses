@@ -4,6 +4,7 @@
     .form-control-borderless {
         border: none;
     }
+
     .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
         border: none;
         outline: none;
@@ -41,16 +42,16 @@
             <h1 class="my-4">Faculty</h1>
             <div class="list-group">
                 <a href="{{url('faculty/videos')}}" class="list-group-item">All Videos</a>
-            @foreach($faculties as $faculty)
+                @foreach($faculties as $faculty)
                     <a href="{{url('faculty/video/'.$faculty->name)}}" class="list-group-item">{{$faculty->name}}</a>
                 @endforeach
             </div>
         </div>
         <!-- /.col-lg-3 -->
 
-            <div class="col-lg-9">
-                <div class="row">@if(count($details)>0)
-                        @foreach($details as $video)
+        <div class="col-lg-9">
+            <div class="row">@if(count($details)>0)
+                    @foreach($details as $video)
                         <div class="col-lg-4 col-md-6 mb-4" style="width: 898px;">
                             <div class="card h-100" style="width: fit-content;">
                                 <div class="card-body">
@@ -65,23 +66,28 @@
                                 </div>
 
                                 @if(auth()->user()->role_id==1)
-                                <div class="row">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" style="margin: 0px 43px 10px 37px;width: 76px;height: 40px;" data-toggle="modal" data-target="#exampleModalCenter"> Edit </button>
-                                <form action="{{url('/faculty/video/delete/'.$video->id)}}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger" > delete </button>
-                                </form>
-                                </div>
-                                @endif
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="row">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary"
+                                                style="margin: 0px 43px 10px 37px;width: 76px;height: 40px;"
+                                                data-toggle="modal" data-target="#exampleModalCenter"> Edit
+                                        </button>
+                                        <form action="{{url('/faculty/video/delete/'.$video->id)}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"> delete</button>
+                                        </form>
+                                    </div>
+                            @endif
+                            <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -92,10 +98,12 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <div >
+                                                                <div>
                                                                     <div class="col-md-12 form-group">
                                                                         <label for="name">Video Name </label>
-                                                                        <input type="text" id="name" name="video_name" value="{{old("video_name")}}" class="form-control py-2">
+                                                                        <input type="text" id="name" name="video_name"
+                                                                               value="{{old("video_name")}}"
+                                                                               class="form-control py-2">
                                                                     </div>
                                                                     @error('video_name')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -103,13 +111,15 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div >
+                                                                <div>
                                                                     <div class="col-md-12 form-group">
                                                                         <label for="name">Faculty</label>
-                                                                        <select class="custom-select" name="faculty_id" >
-                                                                            <option  value="null">Open this select menu</option>
+                                                                        <select class="custom-select" name="faculty_id">
+                                                                            <option value="null">Open this select menu
+                                                                            </option>
                                                                             @foreach($faculties as $faculty)
-                                                                                <option selected value="{{$faculty->id}}">{{$faculty->name}}</option>
+                                                                                <option selected
+                                                                                        value="{{$faculty->id}}">{{$faculty->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -119,10 +129,12 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div >
+                                                                <div>
                                                                     <div class="col-md-12 form-group">
                                                                         <label for="name">Video Tag</label>
-                                                                        <input type="text" name="video_tag"  value="{{old("video_tag")}}"class="form-control py-2">
+                                                                        <input type="text" name="video_tag"
+                                                                               value="{{old("video_tag")}}"
+                                                                               class="form-control py-2">
                                                                     </div>
                                                                     @error('video_tag')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -130,10 +142,12 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div >
+                                                                <div>
                                                                     <div class="col-md-12 form-group">
                                                                         <label for="name">Video URL </label>
-                                                                        <input type="text" name="video_url"  value="{{old("video_url")}}"class="form-control py-2">
+                                                                        <input type="text" name="video_url"
+                                                                               value="{{old("video_url")}}"
+                                                                               class="form-control py-2">
                                                                     </div>
                                                                     @error('video_url')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -142,11 +156,13 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -156,15 +172,15 @@
                             </div>
                         </div>
                     @endforeach
-                    @else
-                        <div class="text-center">
-                            <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  {{$message}}</p>
-                        </div>
-                    @endif
-                </div>
-                <!-- /.row -->
+                @else
+                    <div class="text-center">
+                        <p style="padding: 129px 126px 96px 0px;color: #776b7b;width: 1000px;font-size: 78px;">  {{$message}}</p>
+                    </div>
+                @endif
             </div>
-    <!-- /.col-lg-9 -->
+            <!-- /.row -->
+        </div>
+        <!-- /.col-lg-9 -->
     </div>
     <!-- /.row -->
 </div>

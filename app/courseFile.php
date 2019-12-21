@@ -15,4 +15,8 @@ class courseFile extends Model
     {
         return $this->belongsTo(facultyCourse::class,'course_id');
     }
+    public function faculty()
+    {
+        return $this->belongsTo(courseFile::class,'course_id');
+    }
 }

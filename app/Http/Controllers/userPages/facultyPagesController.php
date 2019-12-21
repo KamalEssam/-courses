@@ -20,7 +20,7 @@ class facultyPagesController extends Controller
     {
         $faculties = faculty::all();
         $videos = faculty::with('video')->get();
-        return view('layouts.pages.videos', compact('faculties', 'videos'));
+        return view('layouts.pages.videos.videos', compact('faculties', 'videos'));
     }
 
     //here we can all video page for specific faculty
@@ -28,7 +28,7 @@ class facultyPagesController extends Controller
     {
         $faculties = faculty::all();
         $videos = faculty::where('name', $faculty_name)->with('video')->get();
-        return view('layouts.pages.videosFacultyPage', compact('faculties', 'videos'));
+        return view('layouts.pages.videos.videosFacultyPage', compact('faculties', 'videos'));
     }
 
     // add
@@ -59,9 +59,9 @@ class facultyPagesController extends Controller
         $videoSearch = $request['videoSearch'];
         $searchRes = video::where('video_tag', 'LIKE', '%' . $videoSearch . '%')->orWhere('video_name', 'LIKE', '%' . $videoSearch . '%')->get();
         if (count($searchRes) > 0)
-            return view('/layouts/pages/videoSearch', compact('faculties'))->withDetails($searchRes)->withQuery($videoSearch);
+            return view('/layouts/pages/videos/videoSearch', compact('faculties'))->withDetails($searchRes)->withQuery($videoSearch);
         else
-            return view('/layouts/pages/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery($videoSearch);
+            return view('/layouts/pages/videos/videoSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery($videoSearch);
     }
 
     //update
@@ -92,7 +92,7 @@ class facultyPagesController extends Controller
         $faculties = faculty::all();
         $dir = config('app.DestinationPath');
         $files = Storage::files($dir . "uploads");
-        return view('layouts.pages.files', compact('faculties', 'courseFiles', 'files'));
+        return view('layouts.pages.files.files', compact('faculties', 'courseFiles', 'files'));
     }
 //upload file part
     public function upload(Request $request)
@@ -140,18 +140,18 @@ class facultyPagesController extends Controller
         $fileSearch = $request['fileSearch'];
         $searchRes = courseFile::where('fileName', 'LIKE', '%' . $fileSearch . '%')->orWhere('extension', 'LIKE', '%' . $fileSearch . '%')->get();
         if (count($searchRes) > 0)
-            return view('layouts.pages.fileSearch', compact('faculties'))->withDetails($searchRes)->withQuery($fileSearch);
+            return view('layouts.pages.files.fileSearch', compact('faculties'))->withDetails($searchRes)->withQuery($fileSearch);
         else
-            return redirect('layouts.pages.fileSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery("");
+            return view('layouts.pages.files.fileSearch', compact('faculties'))->withDetails([])->withMessage('No Details found. Try to search again !')->withQuery("");
     }
 
-
-    public function getFacultyFileaPage($faculty_name)
+//get files for faculty
+    public function getFacultyFilePage($faculty_name)
     {
         $faculties = faculty::all();
         //here is my mistake i have to change it. it will not effect on result but it's for cleaning names" course_id --> faculty id"
-        $files= courseFile::where('id', $faculty_name)->with('course_id')->get();
-        return view('layouts.pages.videosFacultyPage', compact('faculties', 'videos'));
+        $allFiles= faculty::where('name', $faculty_name)->with('courseFile')->get();
+        return view('layouts.pages.files.facultyFiles', compact('faculties', 'allFiles'));
     }
 
 

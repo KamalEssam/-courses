@@ -5,7 +5,7 @@
     <div class="card-body">
         <h5 class="card-title"> Old Exams </h5>
         <p class="card-text"></p>
-        <a href="#" class="btn btn-primary"> Enter</a>
+        <a href="{{route('files')}}" class="btn btn-primary"> Enter</a>
     </div>
 </div>
 <div class="card" style="width: 18rem;display: inline-block; text-align: center; margin-left: 71px; margin-top: 114px; ">

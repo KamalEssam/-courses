@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c82d48-1d9b-49d4-b31f-976dbc42d818" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/fileSearch.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files/fileSearch.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/files.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videoSearch.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videoSearch.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/courseFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/courseFile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/faculty.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/faculty.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/faculties.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/faculties.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/Exams.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files/Exams.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/fileSearch.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files/facultyFiles.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/files.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/files/files.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/singleVideoPage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videos/singleVideoPage.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/stdForm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdForm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videoSearch.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videos/videoSearch.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videos/videos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/videosFacultyPage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/videos/videosFacultyPage.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -129,7 +138,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layouts/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layouts/pages/files" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -140,14 +149,17 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages\studentForms" />
+      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages\videos" />
+      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages\files" />
       <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages\files" />
       <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts\pages" />
       <recent name="C:\Users\kamal\CoursesHelper\app\Http\Controllers\userPages" />
       <recent name="C:\Users\kamal\CoursesHelper\resources\views\layouts" />
       <recent name="C:\Users\kamal\Equalization\resources\views\layouts" />
-      <recent name="C:\Users\kamal\Equalization\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -191,7 +203,7 @@
       <workItem from="1575787976990" duration="49452000" />
       <workItem from="1576159015736" duration="69517000" />
       <workItem from="1576849671292" duration="16034000" />
-      <workItem from="1576893631981" duration="5107000" />
+      <workItem from="1576893631981" duration="9074000" />
     </task>
     <servers />
   </component>
@@ -218,19 +230,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videosFacultyPage.blade.php</url>
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videos/videosFacultyPage.blade.php</url>
           <line>38</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videos.blade.php</url>
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videos/videos.blade.php</url>
           <line>120</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videos.blade.php</url>
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/videos/videos.blade.php</url>
           <line>106</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/files/facultyFiles.blade.php</url>
+          <line>69</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

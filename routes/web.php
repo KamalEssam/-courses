@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/course/single', 'HomeController@cousrsesingle')->name('courses-single');
     Route::get('/contactus', 'HomeController@contactus')->name('contact-us');
     Route::get('/faculty/courses/{id}', 'HomeController@getFacultyCourse')->name('faculty.courses');
-    //the pages of{ video , student form and files }
+    //these pages of{ video , student form and files }
     Route::get('/faculty/videos', 'userPages\facultyPagesController@showVideoPage')->name('showVideos');
     Route::get('/faculty/video/{faculty_name}', 'userPages\facultyPagesController@showVideosFacultyPage')->name('showVideos.faculty');
     ///search for video page
@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/faculty/file/delete/{file_id}', 'userPages\facultyPagesController@deleteFile');
     Route::get('/faculty/file/download/{file_id}', 'userPages\facultyPagesController@download')->name('download');
     Route::post('/faculty/file/search', 'userPages\facultyPagesController@searchFile')->name('search.file');
+    Route::get('/faculty/{faculty_name}/files', 'userPages\facultyPagesController@getFacultyFilePage')->name('faculty.files');
 
 //    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 

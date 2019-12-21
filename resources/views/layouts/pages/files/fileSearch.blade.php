@@ -71,9 +71,9 @@
         <div class="col-lg-3">
             <h1 class="my-4">Faculty</h1>
             <div class="list-group">
-                <a href="{{url('faculty/videos')}}" class="list-group-item">All Videos</a>
+                <a href="{{url('/faculty/files')}}" class="list-group-item">All Videos</a>
                 @foreach($faculties as $faculty)
-                    <a href="{{url('faculty/video/'.$faculty->name)}}" class="list-group-item">{{$faculty->name}}</a>
+                    <a href="{{url('faculty/'.$faculty->name.'/files')}}" class="list-group-item">{{$faculty->name}}</a>
                 @endforeach
             </div>
         </div>

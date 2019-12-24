@@ -5,6 +5,8 @@ namespace App\Http\Controllers\userPages;
 use App\courseFile;
 use App\faculty;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\FileTrait;
+use App\post;
 use App\User;
 use App\video;
 use Couchbase\Document;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class facultyPagesController extends Controller
 {
+    use FileTrait;
     //this is video part contain all video CRUDs and search functions
     //here we get all videos
     public function showVideoPage()
@@ -149,14 +152,45 @@ class facultyPagesController extends Controller
     public function getFacultyFilePage($faculty_name)
     {
         $faculties = faculty::all();
-        //here is my mistake i have to change it. it will not effect on result but it's for cleaning names" course_id --> faculty id"
         $allFiles= faculty::where('name', $faculty_name)->with('courseFile')->get();
         return view('layouts.pages.files.facultyFiles', compact('faculties', 'allFiles'));
     }
 
+/*
+ * End of file page functions
+ * */
 
+public function getPostsPage()
+{
+    $faculties = faculty::all();
+    $posts=post::with('user','faculty')->get()->all();
 
+    return view('layouts.pages.studentForms.stdForm', compact('faculties','posts'));
+}
 
+public function storePost(Request $request)
+{
+    $data=request()->validate([
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'postText'=>'required'
+    ]);
+    $files = $request['image'];
+    $name = $files->getClientOriginalName();
+    $ext = $files->getClientOriginalExtension();
+    $size = $files->getSize();
+    $mim = $files->getMimeType();
+    $realPath = $files->getRealPath();
+    $path = $files->storeAs('/public/image', $name);
+        $storePost = post::create([
+        'imageName' => $name,
+        'imagePath' => $path,
+        'postText' => $request['postText'],
+        'user_id' => auth()->user()->id,
+        'faculty_id' => auth()->user()->faculty_id,
+    ]);
+    return back()->with('success','You have successfully added new post.');
+
+}
 
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStdIssuesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateStdIssuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('std_issues', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('comment');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateStdIssuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('std_issues');
+        Schema::dropIfExists('comments');
     }
 }

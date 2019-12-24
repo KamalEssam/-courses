@@ -19,3 +19,7 @@ $(document).ready(function(){
         $('form p').text(this.files.length + " file(s) selected");
     });
 });
+
+// posts page
+
+

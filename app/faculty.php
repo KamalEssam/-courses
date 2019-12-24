@@ -15,9 +15,10 @@ class faculty extends Model
         return $this->hasMany(video::class , 'faculty_id');
     }
     public function courseFile(){
-        return $this->hasMany(courseFile::class,'course_id');
+        return $this->hasMany(courseFile::class,'faculty_id');
     }
-    public function stdIssue(){
-        return $this->hasMany(stdIssue::class , 'faculty_id');
+    public function post(){
+        return $this->hasMany(post::class , 'faculty_id');
     }
+
 }

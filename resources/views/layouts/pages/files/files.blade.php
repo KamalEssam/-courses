@@ -114,12 +114,14 @@
                                     <button type="button" class="btn btn-primary"><a style="color: #000000;"
                                                                                      href="{{route('download',$file->id)}}">Download</a>
                                     </button>
+                                    @if(auth()->user()->role_id==1)
                                     <form style="    display: contents;"
                                           action="{{url('/faculty/file/delete/'.$file->id)}}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger"> Delete</button>
                                     </form>
+                                        @endif
                                 </div>
                             </div>
                         </div>

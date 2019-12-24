@@ -20,6 +20,7 @@ class User extends Authenticatable
     ];
 
     /**
+     *
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -51,9 +52,15 @@ class User extends Authenticatable
     public function video(){
         return $this->hasMany(video::class);
     }
-    public function filesCourse(){
-        return $this->hasMany(filesCourse::class);
+    public function courseFile(){
+        return $this->hasMany(courseFile::class);
     }public function stdIssue(){
         return $this->hasMany(stdIssue::class);
+    }
+    public function comment(){
+        return $this->hasMany(comment::class,'comment_id');
+    }
+    public function post(){
+        return $this->hasMany(post::class,'user_id');
     }
 }

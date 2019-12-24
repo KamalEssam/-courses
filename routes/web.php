@@ -48,8 +48,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/faculty/file/download/{file_id}', 'userPages\facultyPagesController@download')->name('download');
     Route::post('/faculty/file/search', 'userPages\facultyPagesController@searchFile')->name('search.file');
     Route::get('/faculty/{faculty_name}/files', 'userPages\facultyPagesController@getFacultyFilePage')->name('faculty.files');
+    ///Student posts Routes
+    Route::get('/posts', 'userPages\facultyPagesController@getPostsPage')->name('posts');
+    Route::post('/posts/text', 'userPages\facultyPagesController@storePost')->name('postText');
 
-//    Route::get('/faculty/upload', 'userPages\facultyPagesController@SearchOraddUrl')->name('SearchOraddUrl');
 
 
 });

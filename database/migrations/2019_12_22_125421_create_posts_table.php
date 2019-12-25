@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('faculty_id');
             $table->string('imageName')->nullable();
             $table->string('imagePath')->nullable();
-            $table->string('postText');
+            $table->string('postText')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->timestamps();

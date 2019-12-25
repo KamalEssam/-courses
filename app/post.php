@@ -26,7 +26,7 @@ class post extends Model
         return $this->belongsTo(faculty::class,'faculty_id');
     }
     public function comment(){
-        return $this->hasMany(comment::class,'comment_id');
+        return $this->hasMany(comment::class,'post_id');
     }
 
 }

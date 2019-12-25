@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\userPages;
 
+use App\comment;
 use App\courseFile;
 use App\faculty;
 use App\Http\Controllers\Controller;
@@ -163,7 +164,7 @@ class facultyPagesController extends Controller
 public function getPostsPage()
 {
     $faculties = faculty::all();
-    $posts=post::with('user','faculty')->get()->all();
+    $posts=post::with('user','faculty')->orderBy('id', 'desc')->get()->all();
 
     return view('layouts.pages.studentForms.stdForm', compact('faculties','posts'));
 }
@@ -175,21 +176,33 @@ public function storePost(Request $request)
         'postText'=>'required'
     ]);
     $files = $request['image'];
-    $name = $files->getClientOriginalName();
-    $ext = $files->getClientOriginalExtension();
-    $size = $files->getSize();
-    $mim = $files->getMimeType();
-    $realPath = $files->getRealPath();
-    $path = $files->storeAs('/public/image', $name);
-        $storePost = post::create([
-        'imageName' => $name,
-        'imagePath' => $path,
-        'postText' => $request['postText'],
-        'user_id' => auth()->user()->id,
-        'faculty_id' => auth()->user()->faculty_id,
-    ]);
+    if(isset($files)) {
+        $name = $files->getClientOriginalName();
+        $ext = $files->getClientOriginalExtension();
+        $size = $files->getSize();
+        $mim = $files->getMimeType();
+        $realPath = $files->getRealPath();
+        $path = $files->storeAs('/public/image', $name);
+        $data['imageName'] = $name;
+        $data['imagePath'] = $path;
+    }
+    $data['postText'] = $request['postText'];
+    $data['user_id'] = auth()->user()->id;
+       $data['faculty_id'] = auth()->user()->faculty_id;
+    $storePost = post::create($data);
     return back()->with('success','You have successfully added new post.');
 
+}
+public function getFacultyPostsPage($faculty_name){
+    $faculties = faculty::all();
+    $posts= faculty::where('name', $faculty_name)->with('post')->orderBy('id', 'desc')->get();
+   // dd($posts);
+    return view('layouts.pages.studentForms.stdFormForFaculty', compact('faculties', 'posts'));
+}
+public function getComment($id){
+    $faculties = faculty::all();
+    $post= post::with('user','comment')->where('id', $id)->get();
+    return view('layouts.pages.studentForms.comment', compact('faculties', 'post'));
 }
 
 

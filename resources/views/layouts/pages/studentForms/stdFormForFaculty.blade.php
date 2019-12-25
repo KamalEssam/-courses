@@ -55,13 +55,15 @@
 
     </style>
     @foreach($posts as $post)
+    @foreach($post->post as $post)
     <div class="col-lg-9">
         <div class="row">
+
             @if(count($posts)>0)
 
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <img src="//placehold.it/150x150" class="userImg img-circle pull-left"> <a href="#">{{$post->user->name}}</a>
+                        <img src="//placehold.it/150x150" class="userImg img-circle pull-left"> <a href="#"></a>
                         <div class="clearfix"></div>
                         <hr> <p>{{$post->postText}}</p>
                         <hr>
@@ -71,7 +73,8 @@
 
                         </div>
                         @endif
-                        <form action="{{route('comment'),$postD->id}}" method="post">                            @csrf
+                        <form action="{{route('comment'),$postD->id}}" method="post">
+                            @csrf
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
@@ -90,6 +93,7 @@
         </div>
         <!-- /.row -->
     </div>
+        @endforeach
     @endforeach
     <!-- /.col-lg-9 -->
 </div>

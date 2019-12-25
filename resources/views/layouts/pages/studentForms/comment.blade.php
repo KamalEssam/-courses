@@ -11,22 +11,7 @@
             @endforeach
         </div>
     </div>
-    <div class="col-lg-3">
-        <div class="well well-sm well-social-post" style="margin-top: 92px;">
-            <form class="postForm" action="{{route('postText')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <ul class="list-inline" id='list_PostActions' style="padding-bottom: 10px">
-                    <li class='active'><a  >what's your status ?</a></li>
-                    <li>Add photos   <input  type="file" name="image" class="btn btn-dark"></li>
-                </ul>
-                <textarea class="form-control" name="postText" placeholder="What's in your mind?"></textarea>
-                <ul class='list-inline post-actions'>
-                    <li class='pull-right'><input type="submit" style="margin: 10px;"  value="Post" class='btn btn-primary btn-xs'>
-                    </li>
-                </ul>
-            </form>
-        </div>
-    </div>
+
     <!-- display files from storage/.col-lg-3 -->
     <style>
     .panel-body{
@@ -54,44 +39,45 @@
     }
 
     </style>
-    @foreach($posts as $post)
+    @foreach($post as $postD)
     <div class="col-lg-9">
         <div class="row">
-            @if(count($posts)>0)
-
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <img src="//placehold.it/150x150" class="userImg img-circle pull-left"> <a href="#">{{$post->user->name}}</a>
+                        <img src="//placehold.it/150x150" class="userImg img-circle pull-left"> <a href="#">{{$postD->user->name}}</a>
                         <div class="clearfix"></div>
-                        <hr> <p>{{$post->postText}}</p>
+                        <hr> <p>{{$postD->postText}}</p>
                         <hr>
-                        @if($post->imagePath != null)
+                        @if($postD->imagePath != null)
                         <div >
-                            <img src="{{ Storage::url($post->imagePath)}}" class="postImg img-circle pull-left">
+                            <img src="{{ Storage::url($postD->imagePath)}}" class="postImg img-circle pull-left">
 
                         </div>
                         @endif
-                        <form action="{{route('comment'),$postD->id}}" method="post">                            @csrf
+                        <form action="{{route('comment',$postD->id)}}" method="post">
+                            @csrf
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
                                 </div>
-                                <input type="text" class="form-control"  style=" margin-top: 10px;" placeholder="Add a comment..">
+                                <input type="text" name="comment" class="form-control"  style=" margin-top: 10px;" placeholder="Add a comment..">
                             </div>
                         </form>
+<hr>
+                        @foreach($postD->comment as $comment)
+                        <div class="comment">
+                            <img src="//placehold.it/150x150" class="userImg img-circle pull-left"> <a href="#">{{$comment->user_name}}</a>
+                            <p>{{$comment->comment}}</p>
 
+                        </div>
+                            @endforeach
                     </div>
                 </div>
-            @else
-                <div class="text-center">
-                    <p class="nothingParagraph"> There's No Posts Now</p>
-                </div>
-            @endif
         </div>
         <!-- /.row -->
     </div>
-    @endforeach
     <!-- /.col-lg-9 -->
+        @endforeach
 </div>
 <!-- /.row -->
 </div>

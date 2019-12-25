@@ -49,8 +49,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/faculty/file/search', 'userPages\facultyPagesController@searchFile')->name('search.file');
     Route::get('/faculty/{faculty_name}/files', 'userPages\facultyPagesController@getFacultyFilePage')->name('faculty.files');
     ///Student posts Routes
-    Route::get('/posts', 'userPages\facultyPagesController@getPostsPage')->name('posts');
+    Route::get('/faculties/posts', 'userPages\facultyPagesController@getPostsPage')->name('posts');
     Route::post('/posts/text', 'userPages\facultyPagesController@storePost')->name('postText');
+    Route::get('/faculty/{faculty_name}/posts', 'userPages\facultyPagesController@getFacultyPostsPage')->name('faculty.posts');
+    Route::get('/post/comment/{id}', 'userPages\facultyPagesController@getComment')->name('comment');
 
 
 

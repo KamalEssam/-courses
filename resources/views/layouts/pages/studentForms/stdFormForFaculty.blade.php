@@ -5,7 +5,7 @@
     <div style="margin-left: 27px;" class="col-lg-3">
         <h1 class="my-4">Faculty</h1>
         <div class="list-group">
-            <a href="{{url('/faculties/posts')}}" class="list-group-item">All Videos</a>
+            <a href="{{url('/faculties/posts')}}" class="list-group-item">All posts</a>
             @foreach($faculties as $faculty)
                 <a href="{{url('faculty/'.$faculty->name.'/posts')}}" class="list-group-item">{{$faculty->name}}</a>
             @endforeach
@@ -73,13 +73,13 @@
 
                         </div>
                         @endif
-                        <form action="{{route('comment'),$postD->id}}" method="post">
+                        <form action="{{route('comment',$post->id)}}" method="post">
                             @csrf
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default">+1</button><button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
                                 </div>
-                                <input type="text" class="form-control"  style=" margin-top: 10px;" placeholder="Add a comment..">
+                                <input type="text" class="form-control" name="comment" style=" margin-top: 10px;" placeholder="Add a comment..">
                             </div>
                         </form>
 

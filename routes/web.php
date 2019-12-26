@@ -48,16 +48,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/faculty/file/download/{file_id}', 'userPages\facultyPagesController@download')->name('download');
     Route::post('/faculty/file/search', 'userPages\facultyPagesController@searchFile')->name('search.file');
     Route::get('/faculty/{faculty_name}/files', 'userPages\facultyPagesController@getFacultyFilePage')->name('faculty.files');
-    ///Student posts Routes
+    //Student posts Routes
     Route::get('/faculties/posts', 'userPages\facultyPagesController@getPostsPage')->name('posts');
     Route::post('/posts/text', 'userPages\facultyPagesController@storePost')->name('postText');
     Route::get('/faculty/{faculty_name}/posts', 'userPages\facultyPagesController@getFacultyPostsPage')->name('faculty.posts');
     Route::get('/post/comment/{id}', 'userPages\facultyPagesController@getComment')->name('comment');
-
-
-
+    Route::post('/post/comment/{id}', 'userPages\facultyPagesController@addComment')->name('comment');
+    Route::get('/delete/comment/{id}', 'userPages\facultyPagesController@deleteComment')->name('delete.comment');
 });
-
 
 Route::get('/register', 'authController@getReg')->name('register');
 Route::post('/register', 'authController@regUser')->name('register');

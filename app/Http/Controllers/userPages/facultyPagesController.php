@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 class facultyPagesController extends Controller
 {
     use FileTrait;
+
     //this is video part contain all video CRUDs and search functions
     //here we get all videos
     public function showVideoPage()
@@ -98,6 +99,7 @@ class facultyPagesController extends Controller
         $files = Storage::files($dir . "uploads");
         return view('layouts.pages.files.files', compact('faculties', 'courseFiles', 'files'));
     }
+
 //upload file part
     public function upload(Request $request)
     {
@@ -122,6 +124,7 @@ class facultyPagesController extends Controller
         }
         return redirect("faculty/files")->withErrors("upload failed");
     }
+
 //here for download file
     public function download($id)
     {
@@ -129,6 +132,7 @@ class facultyPagesController extends Controller
         return Storage::download($file->path, $file->fileName);
 
     }
+
 //here delete file
     public function deleteFile(Request $request, $file_id)
     {
@@ -153,57 +157,83 @@ class facultyPagesController extends Controller
     public function getFacultyFilePage($faculty_name)
     {
         $faculties = faculty::all();
-        $allFiles= faculty::where('name', $faculty_name)->with('courseFile')->get();
+        $allFiles = faculty::where('name', $faculty_name)->with('courseFile')->get();
         return view('layouts.pages.files.facultyFiles', compact('faculties', 'allFiles'));
     }
 
-/*
- * End of file page functions
- * */
+    /*
+     * End of file page functions
+     * */
 
-public function getPostsPage()
-{
-    $faculties = faculty::all();
-    $posts=post::with('user','faculty')->orderBy('id', 'desc')->get()->all();
+    public function getPostsPage()
+    {
+        $faculties = faculty::all();
+        $posts = post::with('user', 'faculty')->orderBy('id', 'desc')->get()->all();
 
-    return view('layouts.pages.studentForms.stdForm', compact('faculties','posts'));
-}
-
-public function storePost(Request $request)
-{
-    $data=request()->validate([
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'postText'=>'required'
-    ]);
-    $files = $request['image'];
-    if(isset($files)) {
-        $name = $files->getClientOriginalName();
-        $ext = $files->getClientOriginalExtension();
-        $size = $files->getSize();
-        $mim = $files->getMimeType();
-        $realPath = $files->getRealPath();
-        $path = $files->storeAs('/public/image', $name);
-        $data['imageName'] = $name;
-        $data['imagePath'] = $path;
+        return view('layouts.pages.studentForms.stdForm', compact('faculties', 'posts'));
     }
-    $data['postText'] = $request['postText'];
-    $data['user_id'] = auth()->user()->id;
-       $data['faculty_id'] = auth()->user()->faculty_id;
-    $storePost = post::create($data);
-    return back()->with('success','You have successfully added new post.');
 
-}
-public function getFacultyPostsPage($faculty_name){
-    $faculties = faculty::all();
-    $posts= faculty::where('name', $faculty_name)->with('post')->orderBy('id', 'desc')->get();
-   // dd($posts);
-    return view('layouts.pages.studentForms.stdFormForFaculty', compact('faculties', 'posts'));
-}
-public function getComment($id){
-    $faculties = faculty::all();
-    $post= post::with('user','comment')->where('id', $id)->get();
-    return view('layouts.pages.studentForms.comment', compact('faculties', 'post'));
-}
+    public function storePost(Request $request)
+    {
+        $data = request()->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,doc,docx,pdf,txt|max:2048',
+            'postText' => 'required'
+        ]);
+        $files = $request['image'];
+        if (isset($files)) {
+            $name = $files->getClientOriginalName();
+            $ext = $files->getClientOriginalExtension();
+            $size = $files->getSize();
+            $mim = $files->getMimeType();
+            $realPath = $files->getRealPath();
+            $path = $files->storeAs('/public/image', $name);
+            $data['imageName'] = $name;
+            $data['imagePath'] = $path;
+        }
+        $data['postText'] = $request['postText'];
+        $data['user_id'] = auth()->user()->id;
+        $data['faculty_id'] = auth()->user()->faculty_id;
+        $storePost = post::create($data);
+        return back()->with('success', 'You have successfully added new post.');
+
+    }
+
+    public function getFacultyPostsPage($faculty_name)
+    {
+        $faculties = faculty::all();
+        $posts = faculty::where('name', $faculty_name)->with('post')->orderBy('id', 'desc')->get();
+        // dd($posts);
+        return view('layouts.pages.studentForms.stdFormForFaculty', compact('faculties', 'posts'));
+    }
+
+    public function getComment($id)
+    {
+        $faculties = faculty::all();
+        $post = post::with('user', 'comment')->where('id', $id)->get();
+        return view('layouts.pages.studentForms.comment', compact('faculties', 'post'));
+    }
+
+//add comment
+    public function addComment(Request $request, $id)
+    {
+        $faculties = faculty::all();
+        $data = [
+            'comment' => $request['comment'],
+            'user_name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
+            'post_id' => $id
+        ];
+        $post = post::with('user', 'comment')->where('id', $id)->get();
+        comment::create($data);
+        return redirect()->route('comment', $id)->with('post', $post)->with('faculties', $faculties);
+    }
+
+    public function deleteComment(Request $request, $comment_id)
+    {
+        $find = comment::findOrFail($comment_id);
+        $find->delete();
+        return redirect()->back()->with('success', 'Show is successfully deleted');
+    }
 
 
 

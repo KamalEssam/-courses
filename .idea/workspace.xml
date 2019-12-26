@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c82d48-1d9b-49d4-b31f-976dbc42d818" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/comment.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdFormForFaculty.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/userPages/facultyPagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_22_125421_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_22_125421_create_posts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_22_131058_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_22_131058_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/contact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/comment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdForm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdForm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdFormForFaculty.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/pages/studentForms/stdFormForFaculty.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -199,7 +198,7 @@
       <workItem from="1575787976990" duration="49452000" />
       <workItem from="1576159015736" duration="69517000" />
       <workItem from="1576849671292" duration="16034000" />
-      <workItem from="1576893631981" duration="58079000" />
+      <workItem from="1576893631981" duration="72603000" />
     </task>
     <servers />
   </component>
@@ -244,6 +243,11 @@
           <url>file://$PROJECT_DIR$/resources/views/layouts/pages/files/facultyFiles.blade.php</url>
           <line>69</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/layouts/pages/studentForms/comment.blade.php</url>
+          <line>3</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

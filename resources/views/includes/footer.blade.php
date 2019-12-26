@@ -26,10 +26,10 @@
                 <h3 class="heading">Contact Information</h3>
                 <div class="block-23">
                     <ul>
-                        <li><span class="icon ion-android-pin"></span><span class="text">P.O.Box 21473 Jeddah 12015,Nahdat Ash Sharq ,As Salamah ,Jeddah,Saudi Arabia</span></li>
-                        <li><a href="#"><span class="icon ion-ios-telephone"></span><span class="text"> +966 9200 00268
+                        <li><span class="icon ion-android-pin"></span><span class="text">Madinat Ash Shuruq, Al Qahirah, Egypt</span></li>
+                        <li><a href="#"><span class="icon ion-ios-telephone"></span><span class="text"> 19666
 </span></a></li>
-                        <li><a href="#"><span class="icon ion-android-mail"></span><span class="text">info@arabou.edu.sa</span></a></li>
+                        <li><a href="#"><span class="icon ion-android-mail"></span><span class="text">info@arabou.edu.eg</span></a></li>
                         <li><span class="icon ion-android-time"></span><span class="text">Saturday &mdash; wednesday 8:00am - 5:00pm</span></li>
                     </ul>
                 </div>
